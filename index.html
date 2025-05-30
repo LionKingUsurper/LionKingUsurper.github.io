@@ -1,341 +1,73 @@
-"use client"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proof of Work</title>
+</head>
+<body>
 
-import { useState, useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Mail, Phone, MapPin, Linkedin, Github, Globe, Calendar, Building, Menu, X } from "lucide-react"
+  <header>
+    <h1>Proof of Work</h1>
+    <p>Explore the various projects and initiatives I've contributed to, showcasing my skills in marketing, operations, and growth.</p>
+  </header>
 
-export default function Component() {
-  const [activeSection, setActiveSection] = useState("hero")
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  <section>
+    <h2>Marketing Projects</h2>
 
-  // Handle scroll to update active section
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["hero", "about", "experience", "skills", "contact"]
-
-      for (const section of sections) {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          // If the section is in view (with some buffer for better UX)
-          if (rect.top <= 100 && rect.bottom >= 100) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  // Scroll to section function
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80, // Offset for the navbar height
-        behavior: "smooth",
-      })
-      setActiveSection(sectionId)
-      setMobileMenuOpen(false)
-    }
-  }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
-      {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md shadow-sm">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h2 className="text-xl font-bold text-gray-900">John Doe</h2>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-6">
-            {[
-              { id: "hero", label: "Home" },
-              { id: "about", label: "About" },
-              { id: "experience", label: "Experience" },
-              { id: "skills", label: "Skills" },
-              { id: "contact", label: "Contact" },
-            ].map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-blue-600 ${
-                  activeSection === item.id ? "text-blue-600" : "text-gray-600"
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-md hover:bg-gray-100"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-white border-t py-2 px-6 shadow-md">
-            <div className="flex flex-col space-y-3">
-              {[
-                { id: "hero", label: "Home" },
-                { id: "about", label: "About" },
-                { id: "experience", label: "Experience" },
-                { id: "skills", label: "Skills" },
-                { id: "contact", label: "Contact" },
-              ].map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`text-sm font-medium py-1 transition-colors hover:text-blue-600 ${
-                    activeSection === item.id ? "text-blue-600" : "text-gray-600"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
-
-      <div className="max-w-4xl mx-auto p-6 space-y-8 pt-8">
-        {/* Hero Section */}
-        <Card className="overflow-hidden" id="hero">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 h-32"></div>
-          <CardContent className="relative pt-0 pb-8">
-            <div className="flex flex-col md:flex-row items-start md:items-end gap-6 -mt-16 md:-mt-12">
-              <div className="relative">
-                <img
-                  src="/placeholder.svg?height=120&width=120"
-                  alt="Profile"
-                  className="w-24 h-24 md:w-32 md:h-32 rounded-full border-4 border-white shadow-lg"
-                />
-                <div className="absolute bottom-2 right-2 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
-              </div>
-              <div className="flex-1 space-y-2">
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">John Doe</h1>
-                <p className="text-xl text-gray-600">Senior Software Engineer</p>
-                <p className="text-gray-500 flex items-center gap-2">
-                  <MapPin className="w-4 h-4" />
-                  San Francisco, CA
-                </p>
-              </div>
-              <div className="flex gap-3">
-                <Button variant="outline" size="icon">
-                  <Linkedin className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <Github className="w-4 h-4" />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <Globe className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* About Section */}
-        <Card id="about">
-          <CardHeader>
-            <CardTitle className="text-2xl">About Me</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-gray-700 leading-relaxed">
-              Passionate software engineer with 8+ years of experience building scalable web applications and leading
-              development teams. I specialize in full-stack development with expertise in React, Node.js, and cloud
-              technologies.
-            </p>
-            <p className="text-gray-700 leading-relaxed">
-              I'm driven by solving complex problems and creating user-centric solutions that make a real impact. When
-              I'm not coding, you can find me contributing to open-source projects, mentoring junior developers, or
-              exploring the latest in AI and machine learning.
-            </p>
-            <div className="flex flex-wrap gap-2 pt-2">
-              <Badge variant="secondary">Problem Solver</Badge>
-              <Badge variant="secondary">Team Leader</Badge>
-              <Badge variant="secondary">Open Source Contributor</Badge>
-              <Badge variant="secondary">Mentor</Badge>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Work Experience Section */}
-        <Card id="experience">
-          <CardHeader>
-            <CardTitle className="text-2xl">Work Experience</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-4">
-              <div className="flex flex-col md:flex-row md:items-center gap-4 p-4 rounded-lg bg-slate-50">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building className="w-4 h-4 text-gray-500" />
-                    <h3 className="font-semibold text-lg">Senior Software Engineer</h3>
-                  </div>
-                  <p className="text-blue-600 font-medium">TechCorp Inc.</p>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Led a team of 5 developers in building a microservices architecture that improved system performance
-                    by 40%. Implemented CI/CD pipelines and mentored junior developers.
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  2021 - Present
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row md:items-center gap-4 p-4 rounded-lg bg-slate-50">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building className="w-4 h-4 text-gray-500" />
-                    <h3 className="font-semibold text-lg">Full Stack Developer</h3>
-                  </div>
-                  <p className="text-blue-600 font-medium">StartupXYZ</p>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Developed and maintained React-based web applications serving 100K+ users. Built RESTful APIs and
-                    integrated third-party services.
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  2019 - 2021
-                </div>
-              </div>
-
-              <div className="flex flex-col md:flex-row md:items-center gap-4 p-4 rounded-lg bg-slate-50">
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Building className="w-4 h-4 text-gray-500" />
-                    <h3 className="font-semibold text-lg">Junior Developer</h3>
-                  </div>
-                  <p className="text-blue-600 font-medium">WebSolutions Ltd.</p>
-                  <p className="text-gray-600 text-sm mt-1">
-                    Collaborated on front-end development projects using HTML, CSS, and JavaScript. Gained experience in
-                    responsive design and cross-browser compatibility.
-                  </p>
-                </div>
-                <div className="flex items-center gap-2 text-gray-500 text-sm">
-                  <Calendar className="w-4 h-4" />
-                  2017 - 2019
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Skills Section */}
-        <Card id="skills">
-          <CardHeader>
-            <CardTitle className="text-2xl">Skills</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <div>
-                <h3 className="font-semibold mb-3 text-gray-800">Frontend</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Badge>React</Badge>
-                  <Badge>Next.js</Badge>
-                  <Badge>TypeScript</Badge>
-                  <Badge>Tailwind CSS</Badge>
-                  <Badge>Vue.js</Badge>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-3 text-gray-800">Backend</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Badge>Node.js</Badge>
-                  <Badge>Python</Badge>
-                  <Badge>Express.js</Badge>
-                  <Badge>PostgreSQL</Badge>
-                  <Badge>MongoDB</Badge>
-                </div>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-3 text-gray-800">Tools & Cloud</h3>
-                <div className="flex flex-wrap gap-2">
-                  <Badge>AWS</Badge>
-                  <Badge>Docker</Badge>
-                  <Badge>Git</Badge>
-                  <Badge>Jenkins</Badge>
-                  <Badge>Kubernetes</Badge>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Contact Section */}
-        <Card id="contact">
-          <CardHeader>
-            <CardTitle className="text-2xl">Contact</CardTitle>
-            <CardDescription>Feel free to reach out for collaborations or just a friendly chat!</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Email</p>
-                    <p className="text-gray-600">john.doe@email.com</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <Phone className="w-5 h-5 text-green-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Phone</p>
-                    <p className="text-gray-600">+1 (555) 123-4567</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-purple-600" />
-                  </div>
-                  <div>
-                    <p className="font-medium">Location</p>
-                    <p className="text-gray-600">San Francisco, CA</p>
-                  </div>
-                </div>
-              </div>
-              <div className="space-y-4">
-                <Button className="w-full" size="lg">
-                  <Mail className="w-4 h-4 mr-2" />
-                  Send Message
-                </Button>
-                <Button variant="outline" className="w-full" size="lg">
-                  <Phone className="w-4 h-4 mr-2" />
-                  Schedule Call
-                </Button>
-                <div className="flex gap-2">
-                  <Button variant="outline" className="flex-1">
-                    <Linkedin className="w-4 h-4 mr-2" />
-                    LinkedIn
-                  </Button>
-                  <Button variant="outline" className="flex-1">
-                    <Github className="w-4 h-4 mr-2" />
-                    GitHub
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    <div>
+      <h3>Product Hunt Launch</h3>
+      <p>Breakdown of a successful Product Hunt campaign and strategies used to maximize visibility.</p>
     </div>
-  )
-}
+
+    <div>
+      <h3>Email Campaigns</h3>
+      <p>Examples of email flows, open/click-through rates, and tools used (e.g., Mailchimp, HubSpot).</p>
+    </div>
+
+    <div>
+      <h3>Webinars & Events</h3>
+      <p>Details on organizing, promoting, and executing webinars that drove engagement.</p>
+    </div>
+
+    <div>
+      <h3>Social Media Strategy</h3>
+      <p>Content calendars, post-performance metrics, and platform-specific strategies.</p>
+    </div>
+
+    <div>
+      <h3>LinkedIn Campaigns</h3>
+      <p>Posts that led to high reach and engagement; audience growth tactics.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Operations & Founder's Office</h2>
+
+    <div>
+      <h3>CRM Setup</h3>
+      <p>HubSpot pipeline creation, lead tracking, and sales dashboard setup.</p>
+    </div>
+
+    <div>
+      <h3>Sales Enablement</h3>
+      <p>Demo decks, sales email sequences, objection handling frameworks.</p>
+    </div>
+
+    <div>
+      <h3>Hiring & Onboarding</h3>
+      <p>Job descriptions, outreach messages, and onboarding documentation.</p>
+    </div>
+
+    <div>
+      <h3>Internal Ops</h3>
+      <p>Dashboards, wikis, automations to streamline work across teams.</p>
+    </div>
+
+    <div>
+      <h3>Special Projects</h3>
+      <p>Miscellaneous high-impact projects that required rapid execution and problem-solving.</p>
+    </div>
+  </section>
+
+</body>
+</html>
